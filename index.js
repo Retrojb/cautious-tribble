@@ -1,27 +1,13 @@
 const express = require('express');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
+require('./services/passport')
+
 
 const app = express();
 
-// Generic register, makes passport aware of strategy to use
-passport.use(new GoogleStrategy({
-        clientID: keys.googleClientID,
-        clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
-        }, (accessToken) => { // pure fx is the callback
-            console.log('access token', accessToken)
-    })
-);
-
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-    })
-);
+require('./routes/auth-routes')(app); // valid yuck
+//wrap the route as a function, import
+// if require() returns a function, immediatly invokes the function that was just called with the arguemne 
 
 const PORT = process.env.PORT || 5000;
-
-
 
 app.listen(PORT);
