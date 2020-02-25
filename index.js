@@ -18,10 +18,11 @@ app.use(
     })
 );
 
-app.use(passport.initialize);
+app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/auth-routes')(app); // valid yuck
+
+require('./routes/auth-routes')(app);
 //wrap the route as a function, import
 // if require() returns a function, immediatly invokes the function that was just called with the arguemne 
 

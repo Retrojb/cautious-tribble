@@ -7,5 +7,9 @@ module.exports = (app) => {
     );
 
     //send the code id and turns it to the actual user profile
-    app.get('/auth/google/callback', passport.authenticate('google'))
+    app.get('/auth/google/callback', passport.authenticate('google'));
+
+    app.get('/api/current_user', (req, res) => {
+        res.send(req.user);
+    })
 }
