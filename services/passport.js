@@ -1,13 +1,20 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+
 // Generic register, makes passport aware of strategy to use
-passport.use(new GoogleStrategy({
-    clientID: keys.googleClientID,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback'
-    }, (accessToken, refreshToken, profile, done) => { // pure fx is the callback
-        console.log('access token', accessToken)
-        console.log('profile', profile)
-})
+passport.use(new GoogleStrategy(
+    {
+        clientID: keys.googleClientID,
+        clientSecret: keys.googleClientSecret,
+        callbackURL: '/auth/google/callback'
+    }, (accessToken, refreshToken, profile, done) => { 
+        new User({
+                    googleID: profile.id,
+                    name: profile.displayName
+                })
+        .save()
+    })
 );
