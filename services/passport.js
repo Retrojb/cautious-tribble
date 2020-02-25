@@ -11,10 +11,19 @@ passport.use(new GoogleStrategy(
         clientSecret: keys.googleClientSecret,
         callbackURL: '/auth/google/callback'
     }, (accessToken, refreshToken, profile, done) => { 
-        new User({
-                    googleID: profile.id,
-                    name: profile.displayName
-                })
-        .save()
+        User.findOne({ googleID: profile.id })
+            .then((existingUser) => {
+                if(existingUser) {
+                    console.log('User Exists')
+                }
+                else {
+                    console.log('creating new user')
+                    new User({
+                        googleID: profile.id,
+                        name: profile.displayName
+                    }).save()
+                }
+            } )
+        
     })
 );
