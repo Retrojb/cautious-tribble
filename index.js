@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
-require('./models/User'); // make sure ti declare the model before the service... Thanks javascript
+// Models before services
+require('./models/User');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -23,8 +24,6 @@ app.use(passport.session());
 
 
 require('./routes/auth-routes')(app);
-//wrap the route as a function, import
-// if require() returns a function, immediatly invokes the function that was just called with the arguemne 
 
 const PORT = process.env.PORT || 5000;
 
