@@ -14,3 +14,6 @@ ReactDOM.render(
         <App />
     </Provider>,
     document.querySelector('#root'))
+
+    console.log('Stripe key', process.env.REACT_APP_STRIPE_KEY);
+    console.log('Stripe key', process.env.REACT_APP_STRIPE_KEY);
