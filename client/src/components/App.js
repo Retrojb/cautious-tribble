@@ -4,9 +4,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import Landing from './Landing';
 import Header from './Header'
-const Landing = () => <h1>Landing Page</h1>
-const Dashboard = () => <h3>User Dashboard</h3>
+import Dashboard from './House'
 
 class App extends Component {
     componentDidMount() {
@@ -19,8 +19,8 @@ class App extends Component {
                 <BrowserRouter>
                         <div>
                             <Header />
-                            <Route exact path="/"  component={ Landing }></Route>
-                            <Route path="/profile"  component={ Dashboard }></Route>
+                            <Route exact path="/"  component={Landing}></Route>
+                            <Route path="/house"  component={Dashboard}>jk</Route>
                         </div>
                 </BrowserRouter> 
             </div>
