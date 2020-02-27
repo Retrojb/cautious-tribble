@@ -11,15 +11,7 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-// Passport to use cookies
-app.use(
-    cookieSession({
-        mackAge: 2592000000,
-        keys: [ keys.cookieKey ]
-    })
-);
-
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'prod') {
     // Exprees will serve up production assets
     app.use(express.static('client/build'));
   
@@ -29,7 +21,15 @@ if (process.env.NODE_ENV === 'production') {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
   }
-  
+
+  // Passport to use cookies
+app.use(
+    cookieSession({
+        mackAge: 2592000000,
+        keys: [ keys.cookieKey ]
+    })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
