@@ -6,7 +6,10 @@ import * as actions from '../actions';
 
 import Landing from './Landing';
 import Header from './Header'
-import Dashboard from './House'
+import Dashboard from '../components/Dashboard'
+import House from '../components/House'
+
+import HouseForm from '../components/forms/HouseForm';
 
 class App extends Component {
     componentDidMount() {
@@ -15,15 +18,15 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container">
                 <BrowserRouter>
-                        <div>
+                        <div className="container">
                             <Header />
                             <Route exact path="/"  component={Landing}></Route>
-                            <Route path="/house"  component={Dashboard}></Route>
+                            <Route exact path="/dashboard"  component={Dashboard}></Route>
+                            <Route exact path="/house"  component={House}></Route>
+                            <Route path="/house/create"  component={HouseForm}></Route>
                         </div>
                 </BrowserRouter> 
-            </div>
         )
     }
 }

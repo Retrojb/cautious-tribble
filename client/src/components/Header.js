@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Payments from './Payments';
+import Payments from './forms/Payments';
 
 class Header extends Component {
     renderContent() {
@@ -25,17 +25,18 @@ class Header extends Component {
     render() {
         return (
             <nav>
-                <div className="nav-wrapper">
+                <div className="nav-wrapper green darken-4">
                     <Link
-                    to={this.props.auth ? '/house' : '/'}
+                    to={this.props.auth ? '/dashboard' : '/'}
                     className="left brand-logo"
                     >
+                        <i class="material-icons">dashboard</i>
                         Roommate App
                     </Link>
                         <ul className="right">
                             {this.renderContent()}
-                        </ul>                    
-                </div>
+                        </ul>  
+               </div>
             </nav>
         )
     }
