@@ -2,16 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 // Models before services
 require('./models/User');
-require('./services/passport');
-
+require('./services/passport')
 mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-if (process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'production') {
     // Exprees will serve up production assets
     app.use(express.static('client/build'));
   
@@ -21,7 +21,9 @@ if (process.env.NODE_ENV === 'prod') {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
   }
+// MIDDLEWARE
 
+app.use(bodyParser.json())
   // Passport to use cookies
 app.use(
     cookieSession({
@@ -34,7 +36,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-require('./routes/auth-routes')(app);
+require('./routes/authRoutes')(app);
+require('./routes/paymentRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 
