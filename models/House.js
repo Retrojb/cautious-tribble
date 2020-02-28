@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const RoomSchema = require('./Room');
+const AddressSchema = require('./Address');
+// const RoomSchema = require('./Room');
 
 const houseSchema = new Schema({
     houseName: String,
+    address: [AddressSchema],
+    owner: String,
+    houseType: String,
     rooms: [RoomSchema],
-    _user: { type: Schema.Types.ObjectId, ref: 'User' }
+    // rooms: { type: Schema.Types.ObjectId, ref: 'Room'},
+    _user: { type: Schema.Types.ObjectId, ref: 'User' },
+    // numberOfRoommates: { type: Schema.Types.ObjectId }
 });
 
-module.exports = houseSchema;
+mongoose.model('house', houseSchema);

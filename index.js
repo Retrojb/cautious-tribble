@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 // Models before services
 require('./models/User');
+require('./models/House');
+// const room = mongoose.model('./models/Room');
 require('./services/passport')
 mongoose.connect(keys.mongoURI);
 
@@ -28,6 +30,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/paymentRoutes')(app);
+require('./routes/houseRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets

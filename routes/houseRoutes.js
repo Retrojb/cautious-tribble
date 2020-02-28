@@ -5,16 +5,16 @@ const House = mongoose.model('house');
 
 module.exports = app => {
     app.get('api/house', requireLogin, async(req, res) => {
-        const house = await house.find({ _user: req.user.id}).select({
+        const house = await House.find({ _user: req.user.id}).select({
             rooms: false
         });
         res.send(house);
     });
 
-    app.post('api/houses', requireLogin, async (req, res) => {
+    app.post('api/house', requireLogin, async (req, res) => {
         const { houseName } = req.body;
 
-        const house = new house({
+        const house = new House({
             houseName,
             _user: req.user.id
         });
