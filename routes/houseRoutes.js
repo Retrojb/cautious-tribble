@@ -6,10 +6,6 @@ const House = mongoose.model('house');
 
 module.exports = app => {
 
-    app.get('/', (req, res) => {
-        res.send('Link works')
-    })
-
     app.get('/api/dashboard', requireLogin, async(req, res) => {
         const house = await House.find({ _user: req.user.id}).select({
             rooms: false
