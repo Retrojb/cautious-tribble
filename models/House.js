@@ -5,13 +5,11 @@ const { Schema } = mongoose;
 const houseSchema = new Schema({
     houseName: String,
     owner: String,
-    address: {  
-        streetName: String,
-        city: String,
-        state: String,
-        zipcode: String
-    },
     houseType: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
     // rooms: [RoomSchema],
     // rooms: { type: Schema.Types.ObjectId, ref: 'Room'},
     _user: { type: Schema.Types.ObjectId, ref: 'User' },

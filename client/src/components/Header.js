@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Payments from './forms/Payments';
+import Payments from './Payments';
 
 class Header extends Component {
     renderContent() {
@@ -30,7 +30,7 @@ class Header extends Component {
                     to={this.props.auth ? '/dashboard' : '/'}
                     className="left brand-logo"
                     >
-                        <i class="material-icons">dashboard</i>
+                        <i className="material-icons">dashboard</i>
                         Roommate App
                     </Link>
                         <ul className="right">

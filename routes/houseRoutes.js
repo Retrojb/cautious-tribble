@@ -10,7 +10,7 @@ module.exports = app => {
         res.send('Link works')
     })
 
-    app.get('/api/house', requireLogin, async(req, res) => {
+    app.get('/api/dashboard', requireLogin, async(req, res) => {
         const house = await House.find({ _user: req.user.id}).select({
             rooms: false
         });
@@ -18,17 +18,21 @@ module.exports = app => {
     });
 
     // @TODO: Check if user has a house
-    app.post('/api/house/create', requireLogin, async (req, res) => {
+    app.post('/api/dashboard', requireLogin, async (req, res) => {
+        const { houseName, houseType, owner, street, city, state, zipcode } = req.body;
          const house = new House({
                 houseName,
-                address: address.split(',').map(address => ({ address })), // creates an object
-                owner,
                 houseType,
-                // rooms: rooms.split(',').map(room => ({ room })),
+                owner,
+                street,
+                city,
+                state,
+                zipcode,
                 _user: req.user.id,
         });
 
         try {
+            await house.save();
             const user = await req.user.save();
             res.send(user);
         } catch(err) {

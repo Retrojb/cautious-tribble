@@ -7,12 +7,10 @@ import * as actions from '../actions';
 import Landing from './Landing';
 import Header from './Header'
 import Dashboard from '../components/Dashboard'
-import House from '../components/House'
-
-import HouseForm from '../components/forms/HouseForm';
+import HouseNew from '../components/houses/HouseNew'
 
 class App extends Component {
-    componentDidMount() {
+     componentDidMount() {
         this.props.fetchUser();
     }
 
@@ -23,8 +21,7 @@ class App extends Component {
                             <Header />
                             <Route exact path="/"  component={Landing}></Route>
                             <Route exact path="/dashboard"  component={Dashboard}></Route>
-                            <Route exact path="/house"  component={House}></Route>
-                            <Route path="/house/create"  component={HouseForm}></Route>
+                            <Route exact path="/house/new"  component={HouseNew}></Route>
                         </div>
                 </BrowserRouter> 
         )
